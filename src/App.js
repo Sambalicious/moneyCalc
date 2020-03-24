@@ -12,7 +12,7 @@ const initialState = {
   transactions:[
       {id:1, text: 'Flower', amount: -100 },
       {id:2, text: 'Salary', amount: 2000 },
-      {id:3, text: 'Airtime', amount: 700 },
+      {id:3, text: 'Airtime', amount: -700 },
       {id:4, text: 'Emergency', amount: -100 },
   ]
 }
