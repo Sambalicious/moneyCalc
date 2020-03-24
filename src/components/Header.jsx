@@ -4,7 +4,7 @@ export const Header = () => {
     return (
         <div>
             <h2>
-                PocketMoni
+                MyWallet
             </h2>
         </div>
     )

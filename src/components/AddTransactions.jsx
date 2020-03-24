@@ -2,7 +2,7 @@ import React, { Fragment, useState } from 'react'
 
 export const AddTransactions = () => {
         const [text, setText] = useState('');
-        const [amount, setAmount] = useState('');
+        const [amount, setAmount] = useState(0);
 
         const handleText = e => {
             setText(e.target.value)
@@ -16,8 +16,8 @@ export const AddTransactions = () => {
             <h3>Add new transaction</h3>
       <form>
         <div className="form-control">
-          <label htmlFor="text"> Text</label>
-          <input value={text} onChange={handleText}  type="text" placeholder="Enter text..." />
+          <label htmlFor="text"> Purpose</label>
+          <input value={text} onChange={handleText}  type="text" placeholder="Enter the purpose title..." />
         </div>
 
         <div className="form-control">
