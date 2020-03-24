@@ -16,12 +16,7 @@ function App() {
 
 
   const initialState = {
-    transactions:[
-        {id:1, text: 'Flower', amount: -100 },
-        {id:2, text: 'Salary', amount: 2000 },
-        {id:3, text: 'Airtime', amount: -700 },
-        {id:4, text: 'Emergency', amount: -100 },
-    ]
+    transactions:[]
   }
   
   const reducer = (state, action)=>{
@@ -30,6 +25,11 @@ function App() {
       case 'DELETE_TRANSACTION': return {
         ...state,
          transactions: state.transactions.filter(transaction => transaction.id !== action.payload)
+      }
+
+      case 'ADD_TRANSACTION': return {
+        ...state,
+         transactions: [action.payload,...state.transactions]
       }
     
       default: return state
@@ -43,11 +43,18 @@ function App() {
       payload: id
     })
   }
+  const addTransactions = transaction => {
+    dispatch({
+      type: 'ADD_TRANSACTION',
+      payload: transaction
+    })
+  }
+
   const [state, dispatch] = useReducer(reducer, initialState);
       console.log(state.transactions)
   return (
     <div >
-      <GlobalContext.Provider value={{globalState: state, globalDispatch: dispatch, deleteTransaction}}>
+      <GlobalContext.Provider value={{globalState: state, globalDispatch: dispatch, deleteTransaction, addTransactions}}>
         <Header />
         <div className="container">
           <Balance />

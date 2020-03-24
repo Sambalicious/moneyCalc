@@ -1,8 +1,9 @@
-import React, { Fragment, useState } from 'react'
+import React, { Fragment, useState,useContext } from 'react'
+import { GlobalContext } from '../App';
 
 export const AddTransactions = () => {
         const [text, setText] = useState('');
-        const [amount, setAmount] = useState(0);
+        const [amount, setAmount] = useState('');
 
         const handleText = e => {
             setText(e.target.value)
@@ -11,18 +12,35 @@ export const AddTransactions = () => {
         const handleAmount = e => {
             setAmount(e.target.value)
         }
+
+       const {addTransactions}  = useContext(GlobalContext);
+       
+
+
+       const handleSubmit = e =>{
+            e.preventDefault();
+            const newTransaction = {
+              id: Math.floor(Math.random() * 100000000),
+              text,
+              amount: +amount
+            }
+
+            addTransactions(newTransaction);
+            setText('');
+            setAmount('');
+       }
     return (
         <Fragment>
             <h3>Add new transaction</h3>
-      <form>
+      <form  onSubmit={handleSubmit}>
         <div className="form-control">
-          <label htmlFor="text"> Purpose</label>
+          <label htmlFor="text"> Title </label>
           <input value={text} onChange={handleText}  type="text" placeholder="Enter the purpose title..." />
         </div>
 
         <div className="form-control">
           <label htmlFor="amount" >Amount <br />
-            (negative - expense, positive - income)</label >
+            (Enter negative Values for Expenses e.g -2000 and Positive values for Income e.g +4000)</label >
           <input onChange={handleAmount} value={amount} type="number" placeholder="Enter amount..." />
         </div>
 
